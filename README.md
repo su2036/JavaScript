@@ -104,6 +104,7 @@ home();
 <hr />  
 
 ## LET과 CLOSURE
+>closure상황을 만들어 "몇번째 리스트입니다."라는 출력을 하겠습니다.
 - HTML
 ```
 <!DOCTYPE html>
@@ -140,6 +141,29 @@ home();
     </ul>
     </body>
     </html>
-
+  
+- JavaScript
+```
+var list = document.querySelectorAll("li");
+for(var i=0; i<list.length; i++) {
+  list[i].addEventListener("click", function(){ 
+    //list가 node list type인데 클릭을했을때?
+    console.log(i + "번째 리스트 입니다.");
+  }); 
+}
+```
+- 결과
+![스크린샷 2020-01-07 오후 10 49 24(3)](https://user-images.githubusercontent.com/29330085/71899936-21cf8d00-31a0-11ea-82e3-3e33e0bae314.png)  
+>Output에 첫번째인 javascript, 두번째인 java 어떤 것을 누르더라도 콘솔에는 "4번쨰 리스트 입니다."라고 뜹니다.  
+`closure`때문에 생기는 상황입니다.
+```
+list[i].addEventListener("click", function(){ 
+    console.log(i + "번째 리스트 입니다.");
+  }); 
+```
+>여기서 `function(){ 
+    console.log(i + "번째 리스트 입니다.");
+  }`이 콜백은   
+  'i'는
 
 
