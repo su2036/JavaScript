@@ -324,3 +324,53 @@ console.log(str.includes("^"));
 
 <hr />
 
+# 3. ARRAY
+## FOR OF - 순회하기  
+Array의 순회를 알아보겠습니다. Array의 `for of`가 ES6에서 생겼습니다.
+### FOR문  
+- 예시
+```
+var data = [1, 2, undefined, NaN, null, ""];
+for(var) i=0; i<data.length; i++){
+  console(i);
+}
+```  
+- 결과  
+![스크린샷 2020-01-08 오후 11 25 18](https://user-images.githubusercontent.com/29330085/71985860-be606080-326e-11ea-9005-cdfb965131a8.png)  
+
+### FOREACH
+>forEach는 for문과 마찬가지로 반복적인 기능을 수행할 때 사용합니다.
+하지만 for문처럼 index와 조건식, increase를 정의하지 않아도 callback 함수를 통해 기능을 수행할 수 있습니다.
+```
+var data = [1, 2, undefined, NaN, null, ""];
+data.forEach(function(value){
+  console.log("valueis", value);
+});
+```
+- 결과  
+![스크린샷 2020-01-08 오후 11 44 38](https://user-images.githubusercontent.com/29330085/71987099-e4870000-3270-11ea-8d20-7b1a15e15f1f.png)  
+
+### FOR IN
+
+```
+var data = [1, 2, undefined, NaN, null, ""];
+Array.prototype.getIndex = function(){};
+for(let idx in data) {
+  console.log(data[idx]);
+}
+```
+- 결과  
+![스크린샷 2020-01-08 오후 11 53 55](https://user-images.githubusercontent.com/29330085/71987785-2b292a00-3272-11ea-8e19-078d5cff0e7c.png)  >자신이 갖고 있지 객체 이외에 프로토타입 객체를 이용해 'getIndex'와 같은 객체도 포함될 수 있다는 문제가 있습니다. 
+
+
+## SPREAD OPERATOR - 배열의 복사  
+
+
+
+## SPREAD OPERATOR - 몇가지 활용  
+
+
+
+## FROM 메서드로 진짜 배열 만들기
+
+
