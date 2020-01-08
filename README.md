@@ -446,9 +446,27 @@ sum(...pre)은 즉, sum(100,200,300)으로 될것이며, 배열값을 각각에 
 
 ### MAP
 > 순회를 하면서 필요한 값을 추가하고 새로운 값을 반환합니다.
+- ex1)
 ```
 function addMark() {
-  let newData = arguments.map(function(value){ //가짜배열
+  let newData = [];
+  
+  for(let i=0; i<arguments.length; i++) {
+    newData.push(arguments[i] + "!");
+  }
+  console.log(newData);
+}
+addMark(1,2,3,4,5,6,7,8,9);
+```  
+- 결과  
+![스크린샷 2020-01-09 오전 3 27 40](https://user-images.githubusercontent.com/29330085/72005072-13609e80-3290-11ea-885b-43b56ca880db.png)
+
+> 객체인 'arguments'(배열과 비슷한 형태)를 이용해 가변적인 어떤 파라미터가 들어올 경우 가끔 쓰는 경우가 있습니다.
+
+- ex2)
+```
+function addMark() {
+  let newData = arguments.map(function(value){
     return value + "!";
   });
   console.log(newData);
@@ -456,12 +474,10 @@ function addMark() {
 addMark(1,2,3,4,5,6,7,8,9);
 ```  
 - 결과  
+  ![스크린샷 2020-01-09 오전 3 34 46](https://user-images.githubusercontent.com/29330085/72005467-02645d00-3291-11ea-819b-8880c516833f.png)
+> 'arguments.map'(가짜배열)은 배열이 아니라고 에러가 납니다. //?
 
-> 
-
-
-
-- 해결방법 
+- 해결방법 FROM
 ### FROM
 > 순회를 하면서 필요한 값을 추가하고 새로운 값을 반환합니다.
 ```
