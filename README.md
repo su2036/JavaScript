@@ -354,23 +354,140 @@ data.forEach(function(value){
 
 ```
 var data = [1, 2, undefined, NaN, null, ""];
+
 Array.prototype.getIndex = function(){};
+
 for(let idx in data) {
   console.log(data[idx]);
 }
 ```
 - 결과  
-![스크린샷 2020-01-08 오후 11 53 55](https://user-images.githubusercontent.com/29330085/71987785-2b292a00-3272-11ea-8e19-078d5cff0e7c.png)  >자신이 갖고 있지 객체 이외에 프로토타입 객체를 이용해 'getIndex'와 같은 객체도 포함될 수 있다는 문제가 있습니다. 
+![스크린샷 2020-01-08 오후 11 53 55](https://user-images.githubusercontent.com/29330085/71987785-2b292a00-3272-11ea-8e19-078d5cff0e7c.png)  
+>자신이 갖고 있지 객체 이외에 프로토타입 객체를 이용해 'getIndex'와 같은 객체도 포함될 수 있다는 문제가 있습니다. 
 
+### FOR OF
+```
+var data = [1, 2, undefined, NaN, null, ""];
+
+Array.prototype.getIndex = function(){};
+
+for(let value of data) {
+  console.log(value);
+}
+```
+- 결과  
+![스크린샷 2020-01-09 오전 12 05 25](https://user-images.githubusercontent.com/29330085/71988721-c1aa1b00-3273-11ea-953d-bb889b18b0a2.png)
+>`Array.prototype.getIndex = function(){};`값이 나오지 않았습니다. 
+순회할때는 `index가 아닌 value로 순회가 가능`하므로 `for in`의 문제를 방지할 수 있습니다. 
+
+  - Cf) 
+  ```
+  var str = "hello world!!!!";
+  for(let value of str){
+    console.log(value);
+  }
+  ```  
+  - 결과  
+  ![스크린샷 2020-01-09 오전 12 24 04](https://user-images.githubusercontent.com/29330085/71990296-76453c00-3276-11ea-878d-8341e38bed24.png)  
+  >문자열을 character(문자)단위로 순회하며 출력 해줍니다.
+- TIP)
+  - 절대 배열에서 `for-in`을 쓰면 안됩니다.
 
 ## SPREAD OPERATOR - 배열의 복사  
+> spread operator, 펼침연산자 = [`...`arr]로 표기합니다.
 
+```
+let pre = ["apple", "oragne", 100];
+let newData = [...pre];     //[...pre] = ["apple", "oragne", 100]
+console.log(pre,newData);
+```  
+- 결과  
+![스크린샷 2020-01-09 오전 12 40 09](https://user-images.githubusercontent.com/29330085/71992392-a8579d80-3278-11ea-9054-c1d641acf770.png)
+> 기존에 참조를 끊고 `메모리에 새로운 공간에 새로운 배열로 들어간 것` 입니다.  'pre'와 'newData'는 서로 같은 참조를 유지 하지 않습니다. 완전히 `복사`를 한 것 입니다.  
+`Array.prototype.concat`을 이용해 합칠 경우, 새로운 배열을 복사해 반환하는 것과 같은 것입니다.
 
 
 ## SPREAD OPERATOR - 몇가지 활용  
+### ex1)
+```
+let pre = [100,200, "hello", null];
 
+let newData = [0, 1, 2, 3, ...pre, 4];
 
+console.log(newData);
+console.log(pre === newData);
+```  
+- 결과  
+![스크린샷 2020-01-09 오전 12 40 09](https://user-images.githubusercontent.com/29330085/71999748-52d5bd80-3285-11ea-98a0-3136713ec0c4.png)  
+> 배열을 어떤 특정 배열에 열거할 수 있습니다.
+### ex2)
+
+```
+function sum(a,b,c) {
+  return a+b+c;
+  
+}
+let pre = [100,200,300];
+
+console.log(sum.apply(null, pre));//apply()는 배열로된 하나의 인자를 받습니다.
+                                    null인자의 역할은 호출하는 this를 대체하는 것입니다.
+console.log("result=>", sum(...pre));
+```
+![스크린샷 2020-01-09 오전 2 09 50](https://user-images.githubusercontent.com/29330085/71999643-23bf4c00-3285-11ea-821f-4e815489f9fa.png)  
+> (sum.apply(null, pre))에서 apply는 하나의 인자로 묶어 배열로 만들어 넣는 것입니다.  
+sum(...pre)은 즉, sum(100,200,300)으로 될것이며, 배열값을 각각에 다양한 메개변수 할당이 쉬워졌습니다.  
+   
+  - 결국 배열을 바꾸지 않고 새로운 값을 복사합니다.  
+  배열을 합치거나 펼쳐진상태로 배열을 새로운 파라미터 형태로 전달 해줄때 `spread operator`가 유용합니다.
 
 ## FROM 메서드로 진짜 배열 만들기
+ 
+//객체 arguments => 가변적인 파라미터일 경우에 가끔 씁니다.
+
+### MAP
+> 순회를 하면서 필요한 값을 추가하고 새로운 값을 반환합니다.
+```
+function addMark() {
+  let newData = arguments.map(function(value){ //가짜배열
+    return value + "!";
+  });
+  console.log(newData);
+}
+addMark(1,2,3,4,5,6,7,8,9);
+```  
+- 결과  
+
+> 
 
 
+
+- 해결방법 
+### FROM
+> 순회를 하면서 필요한 값을 추가하고 새로운 값을 반환합니다.
+```
+function addMark() {
+  let newArray = Array.from(arguments);   //arguments로 부터 배열을 만든다.
+  let newData = newArray.map(function(value){
+    return value + "!";
+  });
+  console.log(newData);
+}
+addMark(1,2,3,4,5,6,7,8,9);
+```  
+- 결과  
+  ![스크린샷 2020-01-09 오전 3 00 32](https://user-images.githubusercontent.com/29330085/72003216-36894f00-328c-11ea-9702-43230e47ddfc.png)
+>`from`함수를 사용하면 유사 배열을 배열로 만들어준다.
+가령, DOM조작시 querySelectAll로 얻은 노드 리스트를 from 을 통해 배열로 변경할 수도 있다.
+가짜 배열을 진짜 배열로 만든다.
+
+<hr />
+
+## 실습 예제
+```
+function print() {
+  /*
+  filter, inlues, from을 사용해서 문자열'e'가 포함된 노드로 구성된 배열을 만들어서 반환합니다.
+}
+print();
+```
+- 확인필요
