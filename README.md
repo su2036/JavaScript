@@ -419,7 +419,7 @@ console.log(pre === newData);
 - 결과  
 ![스크린샷 2020-01-09 오전 12 40 09](https://user-images.githubusercontent.com/29330085/71999748-52d5bd80-3285-11ea-98a0-3136713ec0c4.png)  
 > 배열을 어떤 특정 배열에 열거할 수 있습니다.
-### ex2)
+### ex2) 
 
 ```javascript
 function sum(a,b,c) {
@@ -434,15 +434,15 @@ console.log("result=>", sum(...pre));
 ```
 ![스크린샷 2020-01-09 오전 2 09 50](https://user-images.githubusercontent.com/29330085/71999643-23bf4c00-3285-11ea-821f-4e815489f9fa.png)  
 > (sum.apply(null, pre))에서 apply는 하나의 인자로 묶어 배열로 만들어 넣는 것입니다.  
-sum(...pre)은 즉, sum(100,200,300)으로 될것이며, 배열값을 각각에 다양한 메개변수 할당이 쉬워졌습니다.  
+sum(...pre)은 즉, sum(100,200,300)으로 될것이며, 배열값을 각각에 다양한 매개변수 할당이 쉬워졌습니다.  
    
   - 결국 배열을 바꾸지 않고 새로운 값을 복사합니다.  
   배열을 합치거나 펼쳐진상태로 배열을 새로운 파라미터 형태로 전달 해줄때 `spread operator`가 유용합니다.
 
 ## FROM 메서드로 진짜 배열 만들기
  
-//객체 arguments => 가변적인 파라미터일 경우에 가끔 씁니다.
-
+//객체 arguments => 가변적인 파라미터일 경우에 가끔 씁니다.  
+배열 같지만 배열이 아닌 객체들 진짜 객체로 변환해주는 메서드
 ### MAP
 > 순회를 하면서 필요한 값을 추가하고 새로운 값을 반환합니다.
 - ex1)
@@ -495,5 +495,8 @@ addMark(1,2,3,4,5,6,7,8,9);
 가령, DOM조작시 querySelectAll로 얻은 노드 리스트를 from 을 통해 배열로 변경할 수도 있다.
 가짜 배열을 진짜 배열로 만든다.
 
+//forEach / map / filter(필요한 애들만 걸러서 쓴다.) -> return을 쓴다.
+const b =a.filter(isNotA); // a에 A가 아닌것들을 B에 할당해라
+// ['b', 'c']                                                       
 <hr />
 
