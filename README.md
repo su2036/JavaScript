@@ -500,3 +500,99 @@ const b =a.filter(isNotA); // a에 A가 아닌것들을 B에 할당해라
 // ['b', 'c']                                                       
 <hr />
 
+# 4. Object
+## 간단히 객체생성하기
+- 예제
+```javascript
+const name = "crong";
+const age = 33;
+
+const obj = {
+  name : name,
+  age : age
+}
+
+console.log(obj);
+```  
+- 결과  
+![개선된 오브젝트 생성](https://user-images.githubusercontent.com/29330085/72216812-5d37d600-3569-11ea-88fd-d90ae429e5cc.png)  
+
+```javascript
+function getObj() {
+  const name = "crong";
+  const getName = function() {
+    return name;
+  }
+
+  const setName = function(newname) {
+    name = newname;
+  }
+
+  const printName = function() {
+    console.log(name);
+  }
+
+  return {
+    getName : getName,
+    setName : setName
+  }
+}
+var obj = getObj();
+console.log(obj); => console.log(obj.getName());
+```
+- 결과  
+![위 코드 결과 이미지]()
+
+- 개선된 코드
+```javascript
+function getObj() {
+  const name = "crong";
+  const getName = function() {
+    return name;
+  }
+
+  const setName = function(newname) {
+    name = newname;
+  }
+
+  const printName = function() {
+    console.log(name);
+  }
+
+  return {getName, setName, name}
+}
+var obj = getObj();
+console.log(obj.getName());
+```
+- 결과
+![]()  
+
+# #cf) 위코드 의미 확인필요... 바뀐건 알겠는데 무슨의미인지 이해 못함  
+
+- ex) 위에 선언된 것이 있다면 function도 없이 만들수도 있습니다.
+```javascript
+const data = {
+  name,
+  getName() {
+
+  },
+  age
+}
+```
+
+<hr />
+
+# Destructuring
+## Destructuring Array
+
+
+
+## Destructuring Object
+
+
+
+## Destructuring 활용 JSON파싱
+
+
+
+## Destructuring 활용_Event객체 전달
