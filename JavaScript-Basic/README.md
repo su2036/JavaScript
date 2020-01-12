@@ -161,3 +161,26 @@ typeof "abcde"
 ![문자열](https://user-images.githubusercontent.com/29330085/72216306-c700b180-3562-11ea-8131-cb80381c0c79.png)  
 
 
+<hr />
+
+## 문자의 연산
+`\n`을 이용하면 줄바꿈이 일어납니다.
+
+- 문자와 문자를 더할때
+```javascript
+alert("abc" + "def"); // abcdef
+```
+- 문자의 길이를 구할때는 .length
+```javascript
+alert("abc def");   //7, 공백을 포함합니다.
+```
+- cf) 1 + 1과 "1" + "1"
+```javascript
+alert(1 + 1);   //2, 숫자를 더합니다.
+```
+```javascript
+alert("1" + "1");   //11, 숫자인 문자와 숫자인 문자를 더합니다.
+```
+- 결과  
+![문자+문자결과](https://user-images.githubusercontent.com/29330085/72216512-442d2600-3565-11ea-9fd7-6cf04ec7dffa.png)
+
