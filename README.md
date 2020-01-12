@@ -502,6 +502,7 @@ const b =a.filter(isNotA); // a에 A가 아닌것들을 B에 할당해라
 
 # 4. Object
 ## 간단히 객체생성하기
+### 오브젝트 객체 리터럴
 - 예제
 ```javascript
 const name = "crong";
@@ -518,81 +519,202 @@ console.log(obj);
 ![개선된 오브젝트 생성](https://user-images.githubusercontent.com/29330085/72216812-5d37d600-3569-11ea-88fd-d90ae429e5cc.png)  
 
 ```javascript
-function getObj() {
-  const name = "crong";
-  const getName = function() {
+function getObj() {                       // getObj함수
+  const name = "crong";                   
+  const getName = function() {            // getName메소드
     return name;
   }
 
-  const setName = function(newname) {
+  const setName = function(newname) {     // setName메소드
     name = newname;
   }
 
-  const printName = function() {
+  const printName = function() {          // printName메소드
     console.log(name);
   }
 
-  return {
-    getName : getName,
-    setName : setName
+  return {                                // json 방식을 사용하여 객체 리터럴
+    getName : getName,                    // 새로운 오브젝트 형태로 반환
+    setName : setName,                    // 동일한 키값 하나로 통일가능해졌음
   }
-}
-var obj = getObj();
-console.log(obj); => console.log(obj.getName());
-```
-- 결과  
-![위 코드 결과 이미지]()
-
-- 개선된 코드
-```javascript
-function getObj() {
-  const name = "crong";
-  const getName = function() {
-    return name;
-  }
-
-  const setName = function(newname) {
-    name = newname;
-  }
-
-  const printName = function() {
-    console.log(name);
-  }
-
-  return {getName, setName, name}
 }
 var obj = getObj();
 console.log(obj.getName());
 ```
-- 결과
-![]()  
+- 결과  
+![스크린샷 2020-01-13 오전 1 29 21](https://user-images.githubusercontent.com/29330085/72222072-2d59f400-35a4-11ea-8d08-6d8664870649.png)
 
-# #cf) 위코드 의미 확인필요... 바뀐건 알겠는데 무슨의미인지 이해 못함  
-
-- ex) 위에 선언된 것이 있다면 function도 없이 만들수도 있습니다.
+- 개선된 코드
 ```javascript
-const data = {
-  name,
-  getName() {
+  return {getName, setName, name}
+```  
+> 이런식으로 객체 리터럴 반환하는 코드에서 동일한 키값을 하나로 통일할 수 있고 value도 반환 가능 합니다.
 
-  },
-  age
-}
-```
+- 결과  
+![스크린샷 2020-01-13 오전 1 34 57](https://user-images.githubusercontent.com/29330085/72222127-efa99b00-35a4-11ea-9539-866a3d4b5b26.png)
+![스크린샷 2020-01-13 오전 1 37 09](https://user-images.githubusercontent.com/29330085/72222152-3a2b1780-35a5-11ea-9635-5f33c8a318c8.png)
+
+- cf) 또한, function도 없이 value 값 만으로도 만들수도 있습니다.
 
 <hr />
 
-# Destructuring
+# Destructuring (구조분해)
 ## Destructuring Array
+- 일반적으로 Array Destructuring
+```javascript
+var arr = ["test1", "test2", "test3"];
 
+var one = arr[0];
+var two = arr[1];
+var three = arr[2];
 
+console.log(one, two, three);  //test1, test2, test3
+```
+
+- 결과  
+![스크린샷 2020-01-13 오전 1 40 50](https://user-images.githubusercontent.com/29330085/72222219-bf163100-35a5-11ea-8446-8efe90caeee4.png)
+ 
+> 필요한 배열에 특정인덱스에 있는 인덱스 값이 있을때 뽑아 사용하였습니다.  
+
+- ES6에서 Array Destructuring
+```javascript
+const arrdata = ["test1", "test2", "test3"];
+
+const [one, , three] = arrdata;
+
+console.log(one, three);  //test1, test3
+```
+- 결과  
+![스크린샷 2020-01-13 오전 1 41 48](https://user-images.githubusercontent.com/29330085/72222238-e1a84a00-35a5-11ea-9411-90b3116dbe69.png)
 
 ## Destructuring Object
+>객체에서도 필요한 데이터만 뽑아서 변수로 할당할 수 있습니다.
+```JavaScript
+let obj = {
+  name : "crong",
+  address: "Seoul",
+  age : 11
+}
 
+  let {name, age} = obj;                  // 객체의 키 이름 값으로 새로운 변수(obj)만들기
 
+  let {name:myName, age:myAge} = obj;     // 다른변수 이름으로 객체의 값을 할당 받기
+
+  console.log(name, age, myName, myAge);
+```
+- 결과  
+![스크린샷 2020-01-13 오전 1 50 40](https://user-images.githubusercontent.com/29330085/72222358-27194700-35a7-11ea-8ef2-827304e62a8f.png)  
 
 ## Destructuring 활용 JSON파싱
+- 예제  
+```javascript
+var news = [
+  {
+    "title" : "sbs",
+    "imgurl" : "http://static.naver.net/newsstand",
+    "newslist" : [
+            "김계관 \"남한 설레발\" 조롱···정의용 \"과장 발언\" 논란",
+            "혁신한다고 여당 간 카뱅 대표…\"타다 사회적 책임\" 강조",
+            "고민정 청와대 대변인 4·15 총선 출마 결심…일산 출마하나"
+    ]
+  },
+  {
+    "title" : "mbc",
+    "imgurl" : "http://static.daum.net/newsstand",
+    "newslist" : [
+            "이재용 부회장 \'감형 위한 면죄부\'에 \'실효성 문제\'까지 분출",
+            "간호정보조사지에 내 학력은 왜 써야 하나요 ",
+            "터키, 리비아 휴전에 \"평화외교의 결과\"..환영의사 밝혀"
+    ]  
+  }
+];
 
+function getNewsList([,{newslist}]) {   // 두번째 mbc의 뉴스리스트 가져옴
+  console.log(newslist);
+}
+
+getNewsList(news);
+```
+- 결과  
+![스크린샷 2020-01-13 오전 2 39 37](https://user-images.githubusercontent.com/29330085/72223000-f7ba0880-35ad-11ea-89a4-dfc9b2b854ef.png)  
+
+
+> function getNewsList`([,{newslist}])` 파라미터를 활용해서 두번째 mbc의 뉴스리스트를 가져옵니다.  
+이런식으로 JSON으로 전달받은 `데이터 객체를 개별 변수로 할당`하는데 활용할 수 있습니다.
 
 
 ## Destructuring 활용_Event객체 전달
+> 이벤트의 콜백 함수에서 필요한 요소만 뽑아올 수 있습니다.
+- 예제
+  + HTML CODE
+    ```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>JS Bin-test</title>
+    </head>
+    <body>
+      <div>
+        "이재용 부회장 '감형 위한 면죄부'에 '실효성 문제'까지 분출",<br>
+        "간호정보조사지에 내 학력은 왜 써야 하나요 ",<br>
+        "터키, 리비아 휴전에 "평화외교의 결과"..환영의사 밝혀"
+      </div>
+    </body>
+    </html>
+    ```  
+- 예제
+  + OUTPUT
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>JS Bin-test</title>
+    </head>
+    <body>
+      <div>
+        "이재용 부회장 '감형 위한 면죄부'에 '실효성 문제'까지 분출",<br>
+        "간호정보조사지에 내 학력은 왜 써야 하나요 ",<br>
+        "터키, 리비아 휴전에 "평화외교의 결과"..환영의사 밝혀"
+      </div>
+    </body>
+    </html>  
+
+- 예제  
+  + JAVASCRIPT CODE
+  > (클릭)이벤트에 대한 모든 내용 출력
+  ```javascript
+  document.querySelector("div").addEventListener("click", function(evt){
+    console.log(evt.target);
+  });
+  ```
+- 결과   
+![스크린샷 2020-01-13 오전 2 52 33](https://user-images.githubusercontent.com/29330085/72223217-c3dfe280-35af-11ea-87d3-535a49d398ca.png)
+
+- 예제  
+  + JAVASCRIPT CODE
+  > DIV 태그를 타겟으로 수정해서 클릭시 div 출력
+  ```javascript
+  document.querySelector("div").addEventListener("click", function({target}) {
+    console.log(target.tagName);
+  });
+  ```
+- 결과  
+![스크린샷 2020-01-13 오전 2 50 16](https://user-images.githubusercontent.com/29330085/72223171-74011b80-35af-11ea-9f07-fbb850c11a71.png)  
+  
+- 예제  
+  + JAVASCRIPT CODE
+  > 이벤트 전체가 아닌 타겟에대한(텍스트) 내용만 출력
+  ```javascript
+    document.querySelector("div").addEventListener("click", function({target}) {
+  console.log(target.innerText);
+  });
+  ```
+
+- 결과  
+![스크린샷 2020-01-13 오전 2 59 57](https://user-images.githubusercontent.com/29330085/72223395-9300ad00-35b1-11ea-88dc-70d84129380e.png)  
+
+
+<hr />
