@@ -184,3 +184,8 @@ alert("1" + "1");   //11, 숫자인 문자와 숫자인 문자를 더합니다.
 - 결과  
 ![문자+문자결과](https://user-images.githubusercontent.com/29330085/72216512-442d2600-3565-11ea-9fd7-6cf04ec7dffa.png)
 
+- Cf) 원시타입(primitive type)과 참조타입(reference type)
+link : https://ryulog.tistory.com/140
+
+<hr />
+
