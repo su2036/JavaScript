@@ -889,4 +889,111 @@ console.log(ws.has(arr), ws.has(arr2)); // false, false
 ```
 > 참조를 가지고 있는 객체만 저장이 가능합니다. 또, 객체형태를 중복없이 저장하려고 할때 유용합니다.
 
+## MAP & WeakMap 추가정보를 담은
+> Array -> set, weakset  
+Object -> map, weakmap  
 
+- 특성   
+map은 key/value 구조이며 key값에 객체저장
+
+```javascript
+let wm = new WeakMap();
+let myfun = function(){};
+//이 함수가 얼마나 실행 됬는지 알려고 할때.
+
+wm.set(myfun,0); //{function} => 0
+//console.log(wm);
+
+let count = 0;
+for(let i=0; i<10; i++){
+  count = wm.get(myfun);  //get value
+  count++;
+  wm.set(myfun, count);
+}
+
+//console.log(wm);  //{function} => 10
+console.log(wm.get(myfun)); //10 
+
+myfun = null;
+console.log(wm.get(myfun)); // undefined why? myfun = null때문에 초기화 되기 떄문
+console.log(wm.has(myfun)); //false why? myfun = null때문에 초기화
+```
+
+## WeakMap 클래스 인스턴스 변수
+### WeakMap 활용
+```javascript
+function Area(height,width){
+  this.height = height;
+  this.width = width;
+}
+
+Area.prototype.getArea = function(){
+  return this.height * this.width;
+}
+
+let myarea = new Area(10,20);
+console.log(myarea.getArea());  //200
+console.log(myarea.height);   //10
+
+
+```
+
+```javascript
+const wm = new WeakMap(); //전역공간
+
+function Area(height, width){
+  wm.set(this, {height, width});
+}
+
+Area.prototype.getArea = function(){
+  const {height, width} = wm.get(this);
+  return height * width;
+}
+
+let myarea = new Area(10,20);
+console.log(myarea.getArea());  //200
+console.log(myarea.height);   //undefined => myarea외부에서 접근이 안된다
+
+```
+
+```javascript
+const wm = new WeakMap(); //전역공간
+
+function Area(height, width){
+  wm.set(this, {height, width});
+}
+
+Area.prototype.getArea = function(){
+  const {height, width} = wm.get(this);
+  return height * width;
+}
+
+let myarea = new Area(10,20);
+
+console.log(myarea.has(myarea());  // true
+
+myarea = null;
+
+console.log(wm.has(myarea));  //false
+
+```
+
+>Weakmap을 안쓰는경우
+
+```javascript
+const obj = ();
+
+function Area(height, width){
+  obj.height = height;
+  obj.width = width
+}
+
+Area.prototype.getArea = function(){
+  return obj.height * obj.width;
+}
+
+let myarea = new Area(10,20);
+
+console.log(myarea.hetmyArea());  //200
+
+```
