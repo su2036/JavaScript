@@ -718,3 +718,175 @@ getNewsList(news);
 
 
 <hr />
+
+# SET
+> Set은 데이터 타입중의 하나, 중복되는 값을 가지지 않는 값들의 리스트 입니다.  
+그리고 이 때 값은 순서가 존재하지 않습니다.
+- 형식
+>새로운 set을 만들때 `new Set()`을 활용합니다.
+```javascript
+const foo = new Set();
+console.log(foo)  // [object Set]{...}
+
+const bar = new Set([1, 2, 3]);
+console.log(bar)  //  set {1, 2, 3}
+```
+>여기서 set을 만들 때 중복되는 값을 가진 반복자를 넘기면, `set`이 알아서 중복되는 값들 중 맨 앞의 값만 남기고 무시합니다.
+- 예제
+```javascript
+const foo = new Set([1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5, 5]);
+console.log(foo);
+```
+- 결과  
+![스크린샷 2020-01-14 오전 8 11 28](https://user-images.githubusercontent.com/29330085/72299875-7ba2ec00-36a5-11ea-902f-2f83f9bce474.png)  
+
+### add 메소드와 size속성
+>`Set`은 `add` 메소드를 통해 `한 개의 값을 set에 추가`할 수 있습니다.  
+또, `size`속성을 통해 set이 가지고 있는 항목의 수를 알아낼 수 있습니다.
+- 형식 예제
+```javascript
+const foo = new Set();
+console.log(foo.size);
+
+foo.add(1); // foo변수에 1을 추가
+console.log(foo.size);
+```
+- 결과  
+![스크린샷 2020-01-14 오전 8 18 53](https://user-images.githubusercontent.com/29330085/72300235-8d38c380-36a6-11ea-8afd-94a4ded292e1.png)  
+> 결과를 보면 `foo.add(1);`로 `add`를 통해 값을 추가 할 수 있습니다.  
+또, `add`를 통해 값을 추가할 때, 추가하는 값이 이미 존재한다면 무시가 됩니다.
+- 예제
+```javascript
+const foo = new Set(['test1', 'test2', 'test3']);
+foo.add('test4');
+console.log(foo);
+
+foo.add('test1');
+console.log(foo);
+```
+- 결과  
+![스크린샷 2020-01-14 오전 8 26 52](https://user-images.githubusercontent.com/29330085/72300619-a130f500-36a7-11ea-94f8-335383b0dc89.png)  
+> 결과 처럼 `foo.add('test4');`에서 'test4'가 추가 된것을 확인할 수 있고,  
+또 `foo.add('test1');`을 통해 기존에 존재하던 'test1'을 추가하려 하면 무시가 되어 뒤에 추가 되지 않은 것을 확인할 수 있습니다. 
+
+### IS메소드
+>객체`set`에 추가할 때, Object.is()메소드를 사용해 두 값을 비교할 수 있습니다.
+```javascript
+Object.is(10, 10) // true
+Object.is(10, '10') // false
+Object.is({}, {}) // false
+```
+- 결과  
+![스크린샷 2020-01-14 오전 8 52 50](https://user-images.githubusercontent.com/29330085/72301789-41d4e400-36ab-11ea-8033-dbebfdc1c65b.png)  
+> 결과와 같이 숫자 10과 숫자10을 비교했을 때 True,  
+숫자 10과 문자10을 비교했을 때 False,  
+공백, 즉 값이 없는것과 공백을 비교했을 때 False를 확인 할 수 있습니다.  
+
+## HAS, DELETE, CLEAR 메소드
+> 또다른 유용한 메소드로 `has`, `delete`, `clear`가 있습니다.
+- has(값) : set에 값이 존재하는지 확인합니다. 그리고 `True`와 `False`를 반환합니다.
+- delete(값) : set에서 값을 제거합니다.
+- clear() : set에서 모든 값을 제거합니다.
+
+```javascript
+const foo = new Set(['cpu', 'RAM', 'VGA']);
+console.log(foo.has('RAM'));    // true
+console.log(foo.has('CASE'));   // false
+```
+- 결과  
+![스크린샷 2020-01-14 오전 8 58 50](https://user-images.githubusercontent.com/29330085/72302065-2e764880-36ac-11ea-86f1-10e0985b2bcb.png)  
+> 결과 값처럼 `has`를 통해 기존에 있던 RAM은 존재하므로 true,  
+CASE는 존재하지 않으므로 false라는 결과를 확인 할수 있습니다.
+```javascript
+const foo = new Set(['cpu', 'RAM', 'VGA']);
+console.log(foo.size);
+
+foo.delete('RAM');
+console.log(foo.size);
+
+foo.clear();
+console.log(foo.size);
+```
+- 결과  
+![스크린샷 2020-01-14 오전 9 03 41](https://user-images.githubusercontent.com/29330085/72302259-c96f2280-36ac-11ea-9c29-caf88fd7b87c.png)
+![스크린샷 2020-01-14 오전 9 04 49](https://user-images.githubusercontent.com/29330085/72302306-ef94c280-36ac-11ea-8eea-5151f8085cbd.png)  
+> 결과와 같이 `foo.size`를 통해 set이 갖고 있는 값의 수를 확인해보았습니다.  
+`foo.delete`를 이용해 기존에 존재하던 'RAM'을 삭제하여 3에서 2가 되고,  
+`foo.clear`를 이용해 모든 값이 삭제되어 0이 되는 것을 확인 할 수 있습니다.
+
+### 반복하기 - forEach()메소드 사용
+> `set`을 반복할 때는 `forEach()`메소드를 사용하면 되는데, 일반 배열에서 forEach()를 사용할때와 다릅니다.  
+`forEach()`의 인자인 콜백 함수는 3가지 인자를 받습니다.
+- 값 자체
+- 키(인덱스)
+- 반복하고 있는 배열
+```javascript
+const foo = new Set(['안녕', '하이', '헬로']);
+
+foo.forEach((value, key, s){
+  console.log(value, key, s)
+});
+// 안녕 안녕 Set(3) {"안녕", "하이", "헬로"}
+// 하이 하이 Set(3) {"안녕", "하이", "헬로"}
+// 헬로 헬로 Set(3) {"안녕", "하이", "헬로"}
+```
+
+
+- 예제 
+```javascript
+let mySet = new Set();
+
+//console.log(toString.call(mySet));  // [Object Set]
+
+//set : 중복없이 유일한 값을 저장하려고 할때, 이미 존재하는지 체크할 때 유용.
+
+mySet.add("crong");
+mySet.add("hary");
+mySet.add("crong");
+
+mySet.forEach(function(v){
+  console.log(v);
+})
+```
+- 결과  
+![스크린샷 2020-01-14 오전 7 59 28](https://user-images.githubusercontent.com/29330085/72299334-dc312980-36a3-11ea-8ddb-04185283e2ea.png)
+
+## WeakSet
+> `WeakSet`은 약한(weak)객체 참조를 가지게 됩니다. 즉, `WeakSet`이 참조하는 객체에 다른 참조가 없으면 `가비지 컬렉션`이 됩니다.  
+또, `WeakSet`은 원시자료형(primitive types)를 가질 수 없습니다. `string이나 integer`를 set에 추가 할 수 없습니다.
+
+- Weakset의 특성
+    - 객체가 아닌 값을 add(), has(), delete() 메소드들에 인자로 넘기면 `TypeError`가 발생
+    - 반복할 수 없음(non-iterable). 즉, `forEach()`를 사용할 수 없음
+    - `size`속성이 존재하지 않음.
+```javascript
+let arr = [1, 2, 3, 4];
+let ws = new Weakset();
+
+ws.add(arr);
+ws.add(1111);
+ws.add("111");
+ws.add(function(){})
+
+console.log(ws);
+```
+
+```javascript
+let arr = [1,2,3,4];
+let arr2 = [5,6,7,8];
+let obj = {arr, arr2};
+let ws = new WeakSet();
+
+ws.add(arr);
+ws.add(arr2);
+ws.add(obj);
+
+arr = null;
+arr2 = null;
+
+console.log(ws);    // {{arr: [1,2,3,4], arr2:[5,6,7,8]}, [1,2,3,4], [5,6,7,8]}
+console.log(ws.has(arr), ws.has(arr2)); // false, false
+```
+> 참조를 가지고 있는 객체만 저장이 가능합니다. 또, 객체형태를 중복없이 저장하려고 할때 유용합니다.
+
+
