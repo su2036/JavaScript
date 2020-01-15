@@ -215,6 +215,8 @@ if(false && false){ // false로 실행 되지 않습니다.
         </body>
     </HTML>
 ```
+- 결과  
+![스크린샷 2020-01-16 오전 8 48 29](https://user-images.githubusercontent.com/29330085/72481189-09fda600-383d-11ea-94eb-c87aa41ce526.png)  
 > if((id =='changsu' || id == 'su2036' )&& pw == '1234')로 ||가 오면서 ID가 'changsu', 'su2036' 둘중에 아무거나 쓰고 PW를 '1234'를 입력하면 로그인에 성공 하게 됩니다.  
 
 ### !
