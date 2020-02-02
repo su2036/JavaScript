@@ -6,7 +6,7 @@
 
 - 웹팩 설치  
 `$ npm install --save-dev webpack webpack-cli`
-> `--save-dev`명령을 통해 package.json에 등록.  
+> `--save-dev`명령을 통해 package.json에 등록.  dev, 개발할떄만 쓰고 일반 다운받으면 안받아진데!!!
 
 > `ls`명령을 통해 `node_modules`가 설치된것을 확인 할수 있습니다.
 
@@ -81,7 +81,7 @@ console.log("start project by webpack");
 > /dist/bandle.js 파일이 생성된걸 확인가능
 
 - 결과, 웹페이지 실행  
-![스크린샷 2020-01-31 오전 12 51 42](https://user-images.githubusercontent.com/29330085/73465596-efdad080-43c3-11ea-9564-ea2eae0d1bc6.png)
+![스크린샷 2020-01-31 오전 12 51 42](https://user-images.githubusercontent.com/29330085/73465596-efdad080-43c3-11ea-9564-ea2eae0d1bc6.png)
 
 
 ## babel preset설정
@@ -132,7 +132,7 @@ module.exports = {
 };
 ```
 - 결과  
-![스크린샷 2020-01-31 오전 2 30 31](https://user-images.githubusercontent.com/29330085/73474339-b27d3f80-43d1-11ea-9e35-2a77699c5aab.png)
+![스크린샷 2020-01-31 오전 2 30 31](https://user-images.githubusercontent.com/29330085/73474339-b27d3f80-43d1-11ea-9e35-2a77699c5aab.png)
 > 이렇게 바벨에 디버거를 활용해 브라우저 정보와 버전을 콘솔에서 확인가능.
 
 ## webpack-dev-server와 html구성
@@ -143,7 +143,7 @@ module.exports = {
     "start": "MODE_ENV=development webpack-dev-server --inline --open"
 ```  
 
-![스크린샷 2020-01-31 오전 2 38 17](https://user-images.githubusercontent.com/29330085/73474950-c1182680-43d2-11ea-9b1d-c8e35730db46.png)  
+![스크린샷 2020-01-31 오전 2 38 17](https://user-images.githubusercontent.com/29330085/73474950-c1182680-43d2-11ea-9b1d-c8e35730db46.png)  
 
 >위 코드로 기존엔 `--open`을 이용해 콘솔에서 `$ npm run start`를 하게되면 웹브라우저가 뜨게됩니다.   
 여기서 바로바로 새로고침이 가능하도록 `--inline`을 추가해주면 됩니다.  
