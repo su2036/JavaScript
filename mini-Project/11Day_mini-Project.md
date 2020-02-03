@@ -179,7 +179,7 @@ class Blog {
   }
   registerEvents() {
     const startBtn = document.querySelector(".start");
-    //const dataURL = "https://tlhm20eugk.execute—api.ap—northeast-2.amazonaws.com/prod/lamda_get_blog_info";
+    
     const dataURL = "http://dummy.restapiexample.com/api/v1/employees";
     startBtn.addEventListener("click", () => {
       this.setInitData(dataURL);
@@ -187,8 +187,9 @@ class Blog {
 
     this.blogList.addEventListener("click", ({ target }) => {
       const targetClassName = target.className;
+      //classname이 like라면 내 찜하기목록에 새로운 블로그 제목을 추가한다.
       if (targetClassName !== "like" && targetClassName !== "unlike") return;
-      const postTitle = target.previousElementSibling.textContent;
+      const postTitle = target.previousElementSibling.textContent;  // 이전 형제 노드를 타겟
 
       if (targetClassName === "unlike") {
         target.className = "like";
@@ -215,31 +216,33 @@ class Blog {
   }
 
   setInitData(dataURL) {
-    this.getData(dataURL, this.insertPosts.bind(this));
+    this.getData(dataURL, this.insertPosts.bind(this));// bind를 시킴으로써 하단에 list에서도 사용 가능하게 함.
   }
 
-  getData(dataURL, fn) {
-    const oReq = new XMLHttpRequest();
+  getData(dataURL, fn) {  // 필요한 url에 데이터를 가져옴, 콜백 함수를 받아옴
+    const oReq = new XMLHttpRequest();      // 생성자함수, 즉 생성하고 초기화
 
-    oReq.addEventListener("load", () => {
-      //const list = JSON.parse(oReq.responseText).body;
-      const list = JSON.parse(oReq.responseText).data;
+    oReq.addEventListener("load", () => {           // 로딩이 완료되면 
+      const list = JSON.parse(oReq.responseText).data;    // data를 받아온다
       fn(list);
     });
 
-    oReq.open("GET", dataURL);
-    oReq.send();
+    oReq.open("GET", dataURL);    // get방식으로 dataURL을 받아와 Ajax 요청
+    oReq.send();          // 작성된 Ajax 요청을 서버로 전달
   }
 
   insertPosts(list) {
     list.forEach(v => {
       this.blogList.innerHTML += `
       <li>
-      <a href="#">${v.employee_name}</a>
-      <div class="like">찜하기</div>
-      </li>`;
+        <a href="#">${v.employee_name}</a>
+        <div class="like">찜하기</div>
+      </li>
+      `;  // 블로그 주소(link)와 데이터 입력
     });
   }
 }
 export default Blog;
 ```
+- 결과  
+<img width="553" alt="스크린샷 2020-02-03 오후 12 53 57" src="https://user-images.githubusercontent.com/29330085/73624506-64439700-4684-11ea-8f83-1d544d908961.png">
