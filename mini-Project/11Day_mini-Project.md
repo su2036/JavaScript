@@ -165,83 +165,81 @@ export default Blog;
 
 
 ```javascript
-class Blog{
-	constructor(){
-		this.setInitVariables();
-		this.registerEvents();
-		this.likedSet = new Set();
-	}
-	setInitVariables() {
-		this.blogList = document.querySelector(".blogList > ul");
-	}
+class Blog {
+  constructor() {
+    this.setInitVariables();
+    this.registerEvents();
+    this.likedSet = new Set();
+  }
+  setInitVariables() {
+    this.blogList = document.querySelector(".blogList > ul");
+  }
+  setInitData(dataURL) {
+    this.getData(dataURL, this.insertPosts);
+  }
+  registerEvents() {
+    const startBtn = document.querySelector(".start");
+    //const dataURL = "https://tlhm20eugk.execute—api.ap—northeast-2.amazonaws.com/prod/lamda_get_blog_info";
+    const dataURL = "http://dummy.restapiexample.com/api/v1/employees";
+    startBtn.addEventListener("click", () => {
+      this.setInitData(dataURL);
+    });
 
-	registerEvents() {
-		const startBtn = document.querySelector(".start");
-		const dataURL = "http://dummy.restapiexample.com/api/v1/employees";	
-	
-		startBtn.addEventListener("click", () => {
-			this.setInitData(dataURL);
-		});
+    this.blogList.addEventListener("click", ({ target }) => {
+      const targetClassName = target.className;
+      if (targetClassName !== "like" && targetClassName !== "unlike") return;
+      const postTitle = target.previousElementSibling.textContent;
 
-		this.blogList.addEventListener("click", ({target}) => {
-			const targetClassName = target.className;
-			if(targetClassName !== "like" && targetClassName !=="unlike")return;
-			
-			const postemployee_name = target.previousElementSibling.textContent;
+      if (targetClassName === "unlike") {
+        target.className = "like";
+        target.innerText = "찜하기";
+        this.likedSet.delete(postTitle);
+      } else {
+        target.className = "unlike";
+        target.innerText = "찜취소";
+        this.likedSet.add(postTitle);
+      }
 
-			if(targetClassName === "unlike") {
-				target.className = "like";
-				target.innerText = "찜하기";
-				this.likedSet.delete(postemployee_name);
-			} else {
-				target.className = "unlike";
-				target.innerText = "찜취소";
-				this.likedSet.add(postemployee_name);
-			}
-			// 내 찜 목록 뷰에 추가.
-			this.updateLikedList();
-		
-		});
-	}
+      this.updateLikedList();
+    });
+  }
 
-	updateLikedList() {
-		const ul = document.querySelector(".like-list > ul");
-		let likedSum = "";
+  updateLikedList() {
+    const ul = document.querySelector(".like-list > ul");
+    let likeSum = "";
 
-		// li태그에 찜리스트를 넣고 한번의 innerHTML을 사용.
-		this.likedSet.forEach ((v) => {
-			likedSum += `<li> ${v} </li>`;
-		})
-		
-		ul.innerHTML = likedSum;
-	}
-		
-	setInitData(dataURL) {
-		this.getData(dataURL, this.insertPosts.bind(this));    // callback->list.forEach을 넘기기위해 메서드 생성
-	}
+    this.likedSet.forEach(v => {
+      likeSum += `<li>${v}</li>`;
+    });
+    ul.innerHTML = likeSum;
+  }
 
-	getData(dataURL, fn) {	// 필요한 url에 데이터를 가져옴, 콜백 함수를 받아옴
-		const oReq = new XMLHttpRequest();			// 생성자함수, 즉 생성하고 초기화
+  setInitData(dataURL) {
+    this.getData(dataURL, this.insertPosts.bind(this));
+  }
 
-		oReq.addEventListener("load", () => {						// 로딩이 완료되면 
-			const list = JSON.parse(oReq.responseText).data;		// data를 받아온다
-            fn(list);
-		});
-		oReq.open('GET', dataURL);		// get방식으로 dataURL을 받아와 Ajax 요청
-		oReq.send();					// 작성된 Ajax 요청을 서버로 전달
-	}
+  getData(dataURL, fn) {
+    const oReq = new XMLHttpRequest();
 
-    insertPosts(list) {
-    	list.forEach((v) => {
-    		this.blogList.innerHTML +=`
-    		<li>
-            	${v.employee_name}
-            	<div class="like">찜하기</div> 
-            </li>
-            `;	// 블로그 주소(link)와 데이터 입력
-        })
-    }
+    oReq.addEventListener("load", () => {
+      //const list = JSON.parse(oReq.responseText).body;
+      const list = JSON.parse(oReq.responseText).data;
+      fn(list);
+    });
+
+    oReq.open("GET", dataURL);
+    oReq.send();
+  }
+
+  insertPosts(list) {
+    list.forEach(v => {
+      this.blogList.innerHTML += `
+      <li>
+      <a href="#">${v.employee_name}</a>
+      <div class="like">찜하기</div>
+      </li>`;
+    });
+  }
 }
-
 export default Blog;
 ```
