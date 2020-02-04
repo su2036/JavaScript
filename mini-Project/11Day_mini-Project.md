@@ -89,7 +89,7 @@ class Blog{
 export default Blog;
 ```
 - 결과  
-![스크린샷 2020-02-03 오전 1 26 54](https://user-images.githubusercontent.com/29330085/73611358-6bd35380-4624-11ea-921e-06239770853b.png)
+![스크린샷 2020-02-03 오전 1 26 54](https://user-images.githubusercontent.com/29330085/73611358-6bd35380-4624-11ea-921e-06239770853b.png)
 
 
 ## set자료에 데이터 추가(찜하기기능)
@@ -158,7 +158,7 @@ class Blog{
 export default Blog;
 ```
 - 결과  
-![스크린샷 2020-02-03 오전 4 01 40](https://user-images.githubusercontent.com/29330085/73613520-e8246180-4639-11ea-9a54-0449c806101d.png)
+![스크린샷 2020-02-03 오전 4 01 40](https://user-images.githubusercontent.com/29330085/73613520-e8246180-4639-11ea-9a54-0449c806101d.png)
 
 
 ## 찜목록뷰 업데이트
@@ -166,27 +166,27 @@ export default Blog;
 
 ```javascript
 class Blog {
-  constructor() {
-    this.setInitVariables();
+  constructor() {		// 생성자
+    this.setInitVariables();	// 함수호출 1
     this.registerEvents();
     this.likedSet = new Set();
   }
   setInitVariables() {
-    this.blogList = document.querySelector(".blogList > ul");
+    this.blogList = document.querySelector(".blogList > ul"); // 쿼리설랙터 메소드로 blogList클래스의 후손자, ul선택 1
   }
   setInitData(dataURL) {
-    this.getData(dataURL, this.insertPosts);
+    this.getData(dataURL, this.insertPosts);	// dataURL과 insertPosts라는 멤버 변수를 인자로 가지는 getData
   }
-  registerEvents() {
-    const startBtn = document.querySelector(".start");
+  registerEvents() {		// 메소드를 호출해
+    const startBtn = document.querySelector(".start");	// start클래스에 해당하는 애들 싹다 가져와서 버튼으로!
     
     const dataURL = "http://dummy.restapiexample.com/api/v1/employees";
-    startBtn.addEventListener("click", () => {
+    startBtn.addEventListener("click", () => {		// 클릭 이벤트
       this.setInitData(dataURL);
     });
 
-    this.blogList.addEventListener("click", ({ target }) => {
-      const targetClassName = target.className;
+    this.blogList.addEventListener("click", ({ target }) => {		// 리스트로 blogList라는 멤버 변수에 모든 ul태그 선택
+      const targetClassName = target.className;				// 하위 리스트를 가져와서 리스트로 만듬
       //classname이 like라면 내 찜하기목록에 새로운 블로그 제목을 추가한다.
       if (targetClassName !== "like" && targetClassName !== "unlike") return;
       const postTitle = target.previousElementSibling.textContent;  // 이전 형제 노드를 타겟
@@ -245,4 +245,4 @@ class Blog {
 export default Blog;
 ```
 - 결과  
-<img width="553" alt="스크린샷 2020-02-03 오후 12 53 57" src="https://user-images.githubusercontent.com/29330085/73624506-64439700-4684-11ea-8f83-1d544d908961.png">
+<img width="553" alt="스크린샷 2020-02-03 오후 12 53 57" src="https://user-images.githubusercontent.com/29330085/73624506-64439700-4684-11ea-8f83-1d544d908961.png">
