@@ -120,3 +120,5 @@ console.log(numbers.sort(sortfunc));    // 콜백 sortfunc
 ![스크린샷 2020-02-11 오전 8 48 55](https://user-images.githubusercontent.com/29330085/74200840-5953bc80-4cab-11ea-97ba-a36830e624e2.png)
 > 위 코드들을 보면 a, b 두개를 각각 양수인지 음수인지 0인지를 비교하여 순차적으로 또는 역순으로 결과를 나타 내게 됩니다.
 여기서 `(numbers.sort(sortfunc));`해당 라인에 sortfunc가 콜백입니다.
+
+## 비동기 콜백과 Ajax
