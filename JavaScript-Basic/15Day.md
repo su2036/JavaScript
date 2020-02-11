@@ -122,3 +122,36 @@ console.log(numbers.sort(sortfunc));    // 콜백 sortfunc
 여기서 `(numbers.sort(sortfunc));`해당 라인에 sortfunc가 콜백입니다.
 
 ## 비동기 콜백과 Ajax
+
+### 비동기 처리
+> 콜백은 비동기처리에서도 유용하게 사용됩니다. 시간이 오래걸리는 작업이 있을 때 이 작업이 완료된 후에 처리해야 할 일을 콜백으로 지정하면 해당 작업이 끝났을 때 미리 등록한 작업을 실행하도록 할 수 있습니다.
+
+### Ajax
+> Asynchronous Javascript and XML 줄임말.
+
+- 예제, datasource.json.js
+```js
+{"title":"JavaScript","author":"changsu"}
+```
+
+- 예제, demo1.html
+```html
+<html>
+<head>
+    <script src = "//code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <script type = "text/javascript">
+    $.get('./datasource.json.js',   // 첫번째 인자로 데이터를 가져옴
+        function(result){           // 서버와 통신 작업이 끝났을때 함수를 호출
+            console.log(result);
+        }, 'json');
+    </script>
+</body>
+</html>
+```
+- 결과  
+![스크린샷 2020-02-12 오전 8 26 27](https://user-images.githubusercontent.com/29330085/74289236-d34e7900-4d71-11ea-8e3a-fd98addd2433.png)
+![스크린샷 2020-02-12 오전 8 25 43](https://user-images.githubusercontent.com/29330085/74289242-d6e20000-4d71-11ea-9b9d-8a613d6fa902.png)
+> `$.get('./datasource.json.js', ` get의 첫번째 인자로 데이터를 가져오고  
+`function(result){ ` 서버와 통신 작업이 끝났을때 함수를 호출하며 함수의 두번째 인자인 result(매개변수, 가져온 데이터를 객체로 만듬)를 호출 한다는 뜻입니다.

@@ -1,0 +1,12 @@
+<html>
+<head>
+    <script src = "./jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <script type = "text/javascript">
+    $.get('./datasource.json.js',   // get의 첫번째 인자로 데이터를 가져옴
+        function(result){           // 서버와 통신 작업이 끝났을때 함수를 호출하며 함수의 두번째 인자인 result(매개변수, 가져온 데이터를 객체로 만듬)를 호출 한다는 뜻
+            cosole.log(result);
+        }, 'json');
+</body>
+</html>
