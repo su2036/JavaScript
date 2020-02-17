@@ -24,13 +24,12 @@ function sum(){     // 매개변수가 없음
 document.write('result : ' + sum(1,2,3,4));     // 인자 1,2,3,4 전달
 ```
 - 결과  
-<img width="100" alt="스크린샷 2020-02-16 오후 1 48 06" src="https://user-images.githubusercontent.com/29330085/74599321-31a58f80-50c3-11ea-8504-12c4bd27b72c.png">
+<img width="100" alt="스크린샷 2020-02-16 오후 1 48 06" src="https://user-images.githubusercontent.com/29330085/74599321-31a58f80-50c3-11ea-8504-12c4bd27b72c.png">
 
 > 1,2,3,4 인자를 전달하고 `arguments`에 1,2,3,4가 들어가면서 `.length`로 길이 4가 됩니다. 즉, 그리하여 for문에 i는 0~3까지 loop를 돌며 `argumnets[i]`에는 전달받은 인자 1,2,3,4를 순차적으로 i와 함께 document.write를 해서 보여주게 됩니다.
 그리고 `_sum += arguments[i]`는 인자 1,2,3,4를 하나씩 더하고 값을 더해서 리턴하면 인자로 전달된 값에 대한 총합을 구하는 함수 결과를 보여주게 됩니다.
 
-  
-함수에는 arguments라는 변수에 담긴 숨겨진 유사 배열이 있다. 이 배열에는 함수를 호출할 때 입력한 인자가 담겨있다. 아래 예제를 보자. 결과는 10이다.
+
 
 
 
