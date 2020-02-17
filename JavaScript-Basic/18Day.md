@@ -71,3 +71,39 @@ function two(arg1, arg2){
 }
 two('val1');  // two.length 2 arguments 1
 ```
+
+# 함수지향 - 함수의 호출
+## apply소개
+
+- 기본문법
+```js
+function func(){
+
+}
+func();
+```
+
+- 예제
+```js
+function sum(arg1, arg2){
+    return arg1+arg2;
+}
+alert(sum.apply(null, [1,2]))   // 1+2 = 3
+```
+
+## apply사용
+
+```js
+o1 = {val1:1, val2:2, val3:3}
+o2 = {v1:10, v2:50, v3:100, v4:25}
+
+function sum(){
+    var _sum = 0;       // _sum 0으로 초기화
+    for(name in this){  // this라는 객체에 담겨있는 값을 for in문을 함수 호출할 때 정의됨
+        _sum += this[name];
+    }
+    return _sum;
+}
+alert(sum.apply(o1))    //6, 1+2+3 
+alert(sum.apply(o2))    //185, 10+50+100+25
+```
