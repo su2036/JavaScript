@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>TEST Page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <script>
+    function Person(name){      // Person이라는 함수를 정의함. 초기화
+    
+    this.name = name;
+    this.introduce = function(){    // 한번만 메소드를 쓸수 있음
+        return 'My name is '+ this.name;
+        }
+    }
+    let p1 = new Person('changsu'); // 생성자로 'changsu' name을 향하면서 프로퍼티가 됨, 위 코드를 통해 p1변수에 담기게 됨
+    document.write(p1.introduce()+"<br />");
+
+    let p2 = new Person('tester');
+    document.write(p2.introduce()+"<br />");
+    </script>
+</body>
+</html>
