@@ -57,3 +57,26 @@ document.write(p2.introduce()+"<br />");
 ![스크린샷 2020-02-19 오전 8 58 26](https://user-images.githubusercontent.com/29330085/74788771-09ea3d80-52f6-11ea-98d9-744a313b282c.png)  
 
 > 함수 Person에 객체 name과 introduce 객체 메소드를 확인할 수 있으며 밑에 p1과 p2라는 변수에 각각 생성자 함수를 이용해 전달할 문자열이 있으며 이 문자열들은 각각 Person(name)에 전달되며 실행될때 초기화를 통해 변수 p1,p2를 각각 리턴하여 결과가 나오게 됩니다.
+
+
+# 객체지향 - 전역객체
+## 전역객체
+> 전역객체(Gloval object)는 모든 객체는 이 전역객체의 프로퍼티입니다.
+
+```js
+function func(){
+    alert('Hellow?');
+}
+func();
+window.func();  // window : 객체(생략가능) . func() : 속성 ->함수(메소드)
+```
+> `func();`와 `window.func();`는 모두 실행이 됩니다. `모든 전역변수와 함수`는 사실 `window객체의 프로퍼티`입니다. 객체를 명시하지 않으면 암시적으로 window의 프로퍼티로 간주됩니다.
+
+```js
+let o = {'func' : function(){
+    alert('Hello?');
+}}
+o.func();
+window.o.func();
+```
+> JS에서 모든 객체는 기본적으로 전역객체의 프로퍼티임을 알 수 있습니다.
