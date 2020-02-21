@@ -111,8 +111,8 @@ Programmer.prototype.coding = function(){
 function Designer(name){
     this.name = name;
 }
-Programmer.prototype = new Person();
-Programmer.prototype.design = function(){
+Designer.prototype = new Person();
+Designer.prototype.design = function(){
     return "Design is beautiful!";
 }
 
@@ -120,9 +120,9 @@ let p1 = new Programmer('changsu');
 document.write(p1.introduce()+"<br />");
 document.write(p1.coding()+"<br />");
 
-let p1 = new Programmer('kyeongsik');
-document.write(p1.introduce()+"<br />");
-document.write(p1.design()+"<br />");
+let p2 = new Designer('kyeongsik');
+document.write(p2.introduce()+"<br />");
+document.write(p2.design()+"<br />");
 ```
 - 결과  
 ![스크린샷 2020-02-21 오전 8 57 43](https://user-images.githubusercontent.com/29330085/74991043-4188ef00-5488-11ea-930a-7e930ed5f872.png)
