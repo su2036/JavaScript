@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>24Day TestCode</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <script>
+        Object.prototype.contain = function(checkvalue){
+            for(let name in this){
+                if(this[name] === checkvalue){
+                    return true;   
+                }
+            }
+            return false  
+        } 
+
+        let o = {'name' : 'changsu', 'city' : 'seoul'};
+        //console.log(o.contain('changsu'));
+
+        let a = ['changsu','egoing','leezche'];
+        //console.log(a.contain('egoing'));
+        /*
+        for(let name in o){
+            console.log(name);
+        }
+        */
+        for(let name in o){
+                    if(o.hasOwnProperty(name)){     // name에 해당하는 프로퍼티를 어떠한 객체가 가지고 있는지 체크
+                        console.log(name);
+                    }  
+        }
+    </script>
+</body>
+</html>
